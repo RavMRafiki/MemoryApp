@@ -1,7 +1,7 @@
 <script>
   import { createEventDispatcher } from "svelte";
 
-    export let open = false;
+    export let open = true;
     export let value = 0;
     const dispatch = createEventDispatcher();
     function sendClick(){

@@ -1,61 +1,23 @@
 <script>
-  import Card from './lib/Card.svelte'
-  const matrix = [
-    [1,2,6,3],[4, 6,8,1],[3,5,2,8],[5,7,4,7]
-  ]
-  const matrixShow = [
-    [false,false,false,false],[false,false,false,false],[false,false,false,false],[false,false,false,false]
-  ]
-  const matrixShowCorrect = [
-    [true,true,true,true],[true,true,true,true],[true,true,true,true],[true,true,true,true]
-  ]
-  let isCardOpen = false;
-  let openedCard = [-1,-1]
-  function cardClick(i,j){
-    if(!isCardOpen){
-      isCardOpen = true;
-      openedCard = [i,j];
-      matrixShow[i][j] = true;
-    }
-    if(matrixShow[i][j]){
-      return
-    }
-    if(matrix[openedCard[0]][openedCard[1]] === matrix[i][j]){
-      matrixShow[i][j] = true;
-      isCardOpen = false;
-      openedCard = [-1,-1];
-      return
-    }
-    matrixShow[i][j] = true;
-    setTimeout(()=>{
-      matrixShow[i][j] = false;
-      matrixShow[openedCard[0]][openedCard[1]] = false;
-      isCardOpen = false;
-      openedCard = [-1,-1];
-    }
-      ,1000
-    )
-  }
-  $: {if(matrixShow.toString() === matrixShowCorrect.toString()){
-    setTimeout(()=>{
-      alert("You Won"); 
-    },5)
-    
-  }}
+  import Game from "./lib/Game.svelte";
+  let cardNumber = 8;
+  let isGameChoosen = false;
 </script>
-
-<main>
-  {#each matrix as row,i}
-  <div class="row">
-    {#each row as value,j}
-    <Card value={value} open={matrixShow[i][j]} on:cardclick={()=>cardClick(i,j)}/>
-    {/each}
-  </div>
-  {/each}
-</main>
+{#if isGameChoosen}
+<Game {cardNumber}/>
+{:else}
+<h1>MeMoRy</h1>
+  <form on:submit|preventDefault={()=>{isGameChoosen=true}}>
+    <label for="cardNumber">Choose the number of cards:</label>
+    <input id="cardNumber" type="number" bind:value={cardNumber}>
+    <button type="submit">Play</button>
+  </form>
+{/if}
 
 <style>
-  .row {
+  form {
     display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
 </style>
