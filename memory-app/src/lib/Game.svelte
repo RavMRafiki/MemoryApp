@@ -1,6 +1,8 @@
 <script>
     import Card from './Card.svelte'
     export let cardNumber = 8;
+    export let isGameChoosen;
+    let isGameWon = false;
     let rowLength = Math.ceil(Math.sqrt( cardNumber*2));
     let numbers = []
     for(let i=1;i<=cardNumber;i++){
@@ -29,28 +31,6 @@
             matrixShowCorrect.push(matrixShowRowCorrect);
         }
     }
-    // const matrix = [
-    //   [1,2,6,3],[4, 6,8,1],[3,5,2,8],[5,7,4,7]
-    // ]
-    // let matrixShow = [];
-    // let matrixShowCorrect = [];
-    // for(let i=0;i<matrix.length;i++){
-    //     let matrixShowRow = []
-    //     let matrixShowRowCorrect = []
-    //     console.log(matrix[i]);
-    //     for(let j=0;j<matrix[i].length;i++){
-    //         matrixShowRow.push(false)
-    //         matrixShowRowCorrect.push(true)
-    //     }
-    //     matrixShow.push(matrixShowRow);
-    //     matrixShowCorrect.push(matrixShowRowCorrect);
-    // }
-    // const matrixShow = [
-    //   [false,false,false,false],[false,false,false,false],[false,false,false,false],[false,false,false,false]
-    // ]
-    // const matrixShowCorrect = [
-    //   [true,true,true,true],[true,true,true,true],[true,true,true,true],[true,true,true,true]
-    // ]
     let isCardOpen = false;
     let openedCard = [-1,-1]
     function cardClick(i,j){
@@ -80,12 +60,15 @@
     }
     $: {if(matrixShow.toString() === matrixShowCorrect.toString()){
       setTimeout(()=>{
-        alert("You Won"); 
+        alert("You Won");
+        isGameWon = true;
       },5)
       
     }}
 </script>
-  
+  {#if isGameWon}
+     <h2>You Won</h2>
+  {/if}
   <main>
     {#each matrix as row,i}
     <div class="row">
@@ -98,10 +81,14 @@
     </div>
     {/each}
   </main>
-  
+  {#if isGameWon}
+     <button on:click={()=>{isGameChoosen=false;}}>RETURN TO MENU</button>
+  {/if}
   <style>
     .row {
       display: flex;
+      align-items: center;
+      justify-content: center;
     }
   </style>
   

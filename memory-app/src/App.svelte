@@ -4,7 +4,7 @@
   let isGameChoosen = false;
 </script>
 {#if isGameChoosen}
-<Game {cardNumber}/>
+<Game {cardNumber} {isGameChoosen}/>
 {:else}
 <h1>MeMoRy</h1>
   <form on:submit|preventDefault={()=>{isGameChoosen=true}}>
