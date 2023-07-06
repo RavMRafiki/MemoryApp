@@ -3,6 +3,9 @@
   let cardNumber = 8;
   let isGameChoosen = false;
 </script>
+<svelte:head>
+  <title>{!isGameChoosen && "Memory App"}</title>
+</svelte:head>
 {#if isGameChoosen}
 <Game {cardNumber} on:returnToMenu={()=>{isGameChoosen = false}}/>
 {:else}

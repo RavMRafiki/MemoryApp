@@ -71,6 +71,9 @@
       
     }}
 </script>
+<svelte:head>
+  <title>Memory {cardNumber}x{cardNumber}</title>
+</svelte:head>
   {#if isGameWon}
      <h2>You Won</h2>
   {/if}
