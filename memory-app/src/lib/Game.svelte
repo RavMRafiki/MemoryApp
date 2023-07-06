@@ -1,7 +1,12 @@
 <script>
+    import { createEventDispatcher } from 'svelte';
     import Card from './Card.svelte'
+
+    const dispatch = createEventDispatcher();
+    function returnToMenu(){
+        dispatch("returnToMenu");
+    }
     export let cardNumber = 8;
-    export let isGameChoosen;
     let isGameWon = false;
     let rowLength = Math.ceil(Math.sqrt( cardNumber*2));
     let numbers = []
@@ -82,7 +87,7 @@
     {/each}
   </main>
   {#if isGameWon}
-     <button on:click={()=>{isGameChoosen=false;}}>RETURN TO MENU</button>
+     <button on:click={()=>{returnToMenu()}}>RETURN TO MENU</button>
   {/if}
   <style>
     .row {
