@@ -66,7 +66,6 @@
   $: {
     if (matrixShow.toString() === matrixShowCorrect.toString()) {
       setTimeout(() => {
-        alert("You Won");
         isGameWon = true;
       }, 5);
     }
