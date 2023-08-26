@@ -2,6 +2,7 @@
   import { createEventDispatcher } from "svelte";
   import Card from "./Card.svelte";
   import { fade } from "svelte/transition";
+  import MatrixGenerator from "./MatrixGenerator";
 
   const dispatch = createEventDispatcher();
   function returnToMenu() {
@@ -10,11 +11,8 @@
   export let cardNumber = 8;
   let isGameWon = false;
   let rowLength = Math.ceil(Math.sqrt(cardNumber * 2));
-  let numbers = [];
-  for (let i = 1; i <= cardNumber; i++) {
-    numbers.push(i);
-    numbers.push(i);
-  }
+  export let type = "number";
+  let numbers = MatrixGenerator.generateCards(type, cardNumber);
   let matrix = [];
   let matrixShow = [];
   let matrixShowCorrect = [];
