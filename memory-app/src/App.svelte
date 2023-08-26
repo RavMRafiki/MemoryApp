@@ -31,7 +31,7 @@
       <span>Choose type of cards:</span>
       <div class="type-options">
         <label for="number" class:highlighted={gameType === "number"}>
-          number
+          Number
         </label>
         <input
           bind:group={gameType}
@@ -42,7 +42,7 @@
           class="type-selector"
         />
         <label for="letter" class:highlighted={gameType === "letter"}>
-          letter
+          Letter
         </label>
         <input
           bind:group={gameType}
@@ -50,6 +50,20 @@
           name="type"
           id="letter"
           value="letter"
+          class="type-selector"
+        />
+        <label
+          for="korean-letter"
+          class:highlighted={gameType === "korean-letter"}
+        >
+          Korean Letter
+        </label>
+        <input
+          bind:group={gameType}
+          type="radio"
+          name="type"
+          id="korean-letter"
+          value="korean-letter"
           class="type-selector"
         />
       </div>
