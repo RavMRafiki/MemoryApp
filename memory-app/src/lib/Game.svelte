@@ -13,8 +13,17 @@
   let rowLength = Math.ceil(Math.sqrt(cardNumber * 2));
   export let type = "number";
   let numbers = MatrixGenerator.generateCards(type, cardNumber);
+  /**
+   * @type {(string | number)[][]}
+   */
   let matrix = [];
+  /**
+   * @type {(boolean)[][]}
+   */
   let matrixShow = [];
+  /**
+   * @type {(boolean)[][]}
+   */
   let matrixShowCorrect = [];
   for (let i = 0; i < rowLength; i++) {
     let matrixRow = [];
@@ -38,6 +47,9 @@
   let isCardOpen = false;
   let openedCard = [-1, -1];
   function cardClick(i, j) {
+    if (matrixShow[i][j]) {
+      return;
+    }
     if (!isCardOpen) {
       isCardOpen = true;
       openedCard = [i, j];
@@ -54,11 +66,12 @@
     }
     matrixShow[i][j] = true;
     moves++;
+    const cardToClose = openedCard;
+    openedCard = [-1, -1];
+    isCardOpen = false;
     setTimeout(() => {
       matrixShow[i][j] = false;
-      matrixShow[openedCard[0]][openedCard[1]] = false;
-      isCardOpen = false;
-      openedCard = [-1, -1];
+      matrixShow[cardToClose[0]][cardToClose[1]] = false;
     }, 1000);
   }
   $: {
@@ -106,6 +119,7 @@
 <style>
   .row {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     gap: 0.3rem;

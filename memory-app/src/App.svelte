@@ -66,6 +66,17 @@
           value="korean-letter"
           class="type-selector"
         />
+        <label for="cat" class:highlighted={gameType === "cat"}>
+          Cat
+        </label>
+        <input
+          bind:group={gameType}
+          type="radio"
+          name="type"
+          id="cat"
+          value="cat"
+          class="type-selector"
+        />
       </div>
       <button type="submit">Play</button>
     </form>
